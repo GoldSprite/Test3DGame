@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.coffee.upm-git-extension": {
+      "version": "https://e.coding.net/goldsprite/UnityProjects/UpmGitExtension_CodingFork.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "98001185fe1039a30961b2bc6ef4ac6c2eb764da"
+    },
     "com.unity.editorcoroutines": {
       "version": "1.0.0",
       "depth": 1,
