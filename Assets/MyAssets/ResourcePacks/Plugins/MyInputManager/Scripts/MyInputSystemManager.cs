@@ -1,6 +1,7 @@
 ﻿//#define JoyStick
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -19,10 +20,14 @@ public class MyInputSystemManager : MonoBehaviour
     //实时
     public List<MyKVPair<InputActionMap, bool>> InputEnables;
     [Header("KeyListenerValue")]
-    [SerializeField] private Vector2 moveActionValue;
+    [SerializeField] private Vector2 moveKeyValue;
+    public Vector2 MoveKeyValue { get => moveKeyValue; private set => moveKeyValue = value; }
+    [SerializeField] private bool moveBoostKeyValue;
+    public bool MoveBoostKeyValue { get => moveBoostKeyValue; private set => moveBoostKeyValue = value; }
     [SerializeField] private bool returnKeyValue;
-    public Vector2 MoveActionValue { get => moveActionValue; private set => moveActionValue = value; }
     public bool ReturnKeyValue { get => returnKeyValue; private set => returnKeyValue = value; }
+    [SerializeField] private bool attackKeyValue;
+    public bool AttackKeyValue { get => attackKeyValue; private set => attackKeyValue = value; }
 
     Vector2 oldJoystickMoveActionValue;  //判断是否有新输入变化值
 
@@ -56,8 +61,8 @@ public class MyInputSystemManager : MonoBehaviour
         //输入禁用
         //if (InputEnabled)
         //{
-        //    MoveActionValue = default;
-        //    ReturnKeyValue = false;
+        //    MoveKeyValue = default;
+        //    AttackKeyValue = false;
         //}
 #if JoyStick
         if(joystick != null)
@@ -128,9 +133,10 @@ public class MyInputSystemManager : MonoBehaviour
         var gamePlay = InputActionInstance.GamePlay;
         var uiPlay = InputActionInstance.UIPlay;
 
-        RegisterActionListener<Vector2>(gamePlay.Move, (val) => { MoveActionValue = val; });
-
-        RegisterActionListener<bool>(uiPlay.Return, (val) => { ReturnKeyValue = val; });
+        RegisterActionListener<Vector2>(gamePlay.Move, (val) => { MoveKeyValue = val; });
+        RegisterActionListener<bool>(gamePlay.MoveBoost, (val) => { MoveBoostKeyValue = val; });
+        RegisterActionListener<bool>(uiPlay.Return, (val) => { AttackKeyValue = val; });
+        RegisterActionListener<bool>(gamePlay.Attack, (val) => { AttackKeyValue = val; });
 
     }
 
