@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.goldsprite.gstools.CustomRequireEssentials;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -6,8 +7,11 @@ using UnityEngine.InputSystem;
 
 public class My3DPlayerController : MonoBehaviour
 {
+    [RequireEssentials(typeof(Rigidbody))] public string RequireVal;
+
     public MyInputSystemManager input => MyInputSystemManager.Instance;
     Rigidbody rb;
+
 
     public Action<Vector2> MoveAction = (v)=>
     {
@@ -63,11 +67,18 @@ public class My3DPlayerController : MonoBehaviour
 
 //    private void ComponentsCheck(My3DPlayerController target)
 //    {
+//        bool pass = true;
 //        if (target.GetComponent<Rigidbody>() == null)
 //        {
-//            GUILayout.Label("组件不全");
-//            target.enabled = false;
+//            var type = typeof(Rigidbody);
+//            EditorGUILayout.HelpBox("必需的组件不存在，点击按钮来添加。", MessageType.Warning);
+//            if (GUILayout.Button("添加 " + type.Name))
+//                if (target.gameObject.AddComponent(type) == null)
+//                    Debug.Log("添加组件失败, 请手动添加.");
+//            target.enabled = pass = false;
 //        }
+
+//        if(pass) target.enabled = true;
 //    }
 
 
