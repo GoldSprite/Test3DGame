@@ -133,7 +133,7 @@ public class MyInputSystemManager : MonoBehaviour
         var gamePlay = InputActionInstance.GamePlay;
         var uiPlay = InputActionInstance.UIPlay;
 
-        RegisterActionListener<Vector2>(gamePlay.Move, (val) => { MoveKeyValue = val; });
+        RegisterActionListener<Vector2>(gamePlay.Move, (val) => { MoveKeyValue = val.normalized; });
         RegisterActionListener<bool>(gamePlay.MoveBoost, (val) => { MoveBoostKeyValue = val; });
         RegisterActionListener<bool>(uiPlay.Return, (val) => { AttackKeyValue = val; });
         RegisterActionListener<bool>(gamePlay.Attack, (val) => { AttackKeyValue = val; });

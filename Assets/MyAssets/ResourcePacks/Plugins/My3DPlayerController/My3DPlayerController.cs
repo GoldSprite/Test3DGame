@@ -1,5 +1,6 @@
 ﻿using com.goldsprite.gstools.CustomRequireEssentials;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -9,20 +10,37 @@ public class My3DPlayerController : MonoBehaviour
 {
     [RequireEssentials(typeof(Rigidbody))] public string RequireVal;
 
+    //引用
     public MyInputSystemManager input => MyInputSystemManager.Instance;
     Rigidbody rb;
 
+    //玩家属性
+    public float speed = 5;
 
-    public Action<Vector2> MoveAction = (v)=>
-    {
-        //Debug.Log($"{(v.magnitude==0?"抬起":"按下")}移动");
-    };
+    //按键触发事件
+    public Action<Vector2> MoveAction;
 
 
     private void Start()
     {
         RegisterAllActionListeners();
         GetAllComponents();
+    }
+
+
+    private void Update()
+    {
+        var moveVec = input.MoveKeyValue;
+        if (moveVec.magnitude != 0)
+        {
+            var dir = UnityUtils.P2To3(moveVec, rb.velocity.y);
+            //移动玩家
+            rb.velocity = dir * speed;
+
+            //朝向转向
+            FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
+            rb.rotation = Quaternion.Lerp(rb.rotation, FaceTurningRotation, Time.deltaTime * FaceTurningRate);
+        }
     }
 
 
@@ -38,9 +56,32 @@ public class My3DPlayerController : MonoBehaviour
     }
 
 
+    float FaceTurningRate = 10f;
+    Quaternion FaceTurningRotation;
     private void RegisterAllActionListeners()
     {
-        input.RegisterActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
+    //    MoveAction = (v) =>
+    //    {
+    //        if (v.magnitude == 0) return;
+
+    //        var dir = UnityUtils.P2To3(v, rb.velocity.y);
+    //        移动玩家
+    //        rb.velocity = dir * speed;
+
+    //        朝向转向
+    //        FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
+    //};
+    //    input.RegisterActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
+    }
+
+
+    private IEnumerator FaceTurningTask(Quaternion rotation)
+    {
+        while (input.MoveKeyValue.magnitude != 0)
+        {
+            rb.rotation *= Quaternion.RotateTowards(rb.rotation, rotation, Time.deltaTime * FaceTurningRate);
+            yield return null;
+        }
     }
 
 
