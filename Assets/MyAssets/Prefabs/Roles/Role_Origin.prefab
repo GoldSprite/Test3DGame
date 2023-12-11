@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5986818886409436941}
   - component: {fileID: 8722106356724433208}
+  - component: {fileID: 2051687971875908145}
   - component: {fileID: 8498628421063477473}
   - component: {fileID: 5980828792012980736}
   - component: {fileID: 5070386700511242749}
@@ -48,6 +49,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RequireVal: 
+  mode: 0
+--- !u!114 &2051687971875908145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549929449277675620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b5a955c6f8cb7488cba2b936d5c649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+  maxHealth: 20
 --- !u!95 &8498628421063477473
 Animator:
   serializedVersion: 5
