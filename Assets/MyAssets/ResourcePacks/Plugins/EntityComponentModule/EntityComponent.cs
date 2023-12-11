@@ -1,8 +1,15 @@
-﻿using System;
+﻿using com.goldsprite.gstools.CustomRequireEssentials;
+using System;
 using UnityEngine;
 
 public class EntityComponent: MonoBehaviour
 {
+#if UNITY_EDITOR
+    [RequireEssentials(typeof(Animator))] public string RequireVal;
+#endif
+
+    //引用
+    Animator anim;
 
     //配置
     [Header("配置属性")]
@@ -15,7 +22,7 @@ public class EntityComponent: MonoBehaviour
     public float Health { get => health; protected set => health = value; }
 
     //事件
-    public Action<float> TakeDamage;
+    public Action<Vector3, float> TakeDamage;
 
 
     public EntityComponent()
@@ -24,15 +31,31 @@ public class EntityComponent: MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+
     protected virtual void Init()
     {
         Health = MaxHealth;
 
-        TakeDamage = (damage) =>
+        TakeDamage = (hurtPos, damage) =>
         {
-            if (health <= 0) return;
+            if (health <= 0) return;  //已死亡不反馈
 
+            //受伤
             health -= damage;
+            //动画混合树
+            var hurtPos2Local = transform.InverseTransformPoint(hurtPos);
+            hurtPos2Local.y = 0;
+            var blendVal = hurtPos2Local.normalized;
+            anim.SetBool("Hurt", true);
+            anim.SetFloat("HurtDirForward", blendVal.z);
+            anim.SetFloat("HurtDirRight", blendVal.x);
+
+            //死亡
             if(health <= 0)
             {
                 health = 0;
@@ -42,11 +65,11 @@ public class EntityComponent: MonoBehaviour
     }
 
 
-    [ContextMenu("M_TakeDamage")]
-    public void M_TakeDamage()
-    {
-        TakeDamage?.Invoke(5);
-    }
+    //[ContextMenu("M_TakeDamage")]
+    //public void M_TakeDamage()
+    //{
+    //    TakeDamage?.Invoke(5);
+    //}
 
 
 }
