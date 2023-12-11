@@ -8,18 +8,27 @@ using UnityEngine.InputSystem;
 
 public class My3DPlayerController : MonoBehaviour
 {
+#if UNITY_EDITOR
     [RequireEssentials(typeof(Rigidbody), typeof(Animator))] public string RequireVal;
+#endif
 
     //引用
     public MyInputSystemManager input => MyInputSystemManager.Instance;
     Rigidbody rb;
     Animator anim;
 
+    //配置
+    public ControlType mode;
+
     //玩家属性
     //float speed = 1;
 
     //按键触发事件
-    public Action<Vector2> MoveAction;
+    //public Action<Vector2> MoveAction;
+
+    //按键映射
+    public Vector2 MoveKeyValue => mode == ControlType.P1 ? input.MoveKeyValue : input.MoveKey2Value;
+    public bool MoveBoostKeyValue => mode == ControlType.P1 ? input.MoveBoostKeyValue : input.MoveBoostKey2Value;
 
 
     private void Start()
@@ -47,13 +56,13 @@ public class My3DPlayerController : MonoBehaviour
     float currentMoveKeyRate;
     private void MoveTask()
     {
-        var moveVec = input.MoveKeyValue;
+        var moveVec = MoveKeyValue;
         var dir = UnityUtils.P2To3(moveVec, 0);
         var moveLength = moveVec.magnitude;
         var k = 0;
         if (moveLength != 0)
         {
-            k = input.MoveBoostKeyValue ? 2 : 1;
+            k = MoveBoostKeyValue ? 2 : 1;
             //朝向转向
             Facing(dir);
         }
@@ -105,7 +114,13 @@ public class My3DPlayerController : MonoBehaviour
 
     private void RemoveAllActionListeners()
     {
-        input.RemoveActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
+        //input.RemoveActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
+    }
+
+
+    public enum ControlType
+    {
+        P1, P2
     }
 
 

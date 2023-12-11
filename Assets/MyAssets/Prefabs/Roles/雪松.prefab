@@ -9479,7 +9479,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2549929449277675620, guid: a9db5ebeac18afd43a4505985a3c4237, type: 3}
       propertyPath: m_Name
-      value: "\u96EA\u677E3"
+      value: "\u96EA\u677E"
       objectReference: {fileID: 0}
     - target: {fileID: 5070386700511242749, guid: a9db5ebeac18afd43a4505985a3c4237, type: 3}
       propertyPath: m_Height
@@ -9560,6 +9560,10 @@ PrefabInstance:
     - target: {fileID: 8498628421063477473, guid: a9db5ebeac18afd43a4505985a3c4237, type: 3}
       propertyPath: m_WarningMessage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722106356724433208, guid: a9db5ebeac18afd43a4505985a3c4237, type: 3}
+      propertyPath: mode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9db5ebeac18afd43a4505985a3c4237, type: 3}

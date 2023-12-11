@@ -29,6 +29,12 @@ public class MyInputSystemManager : MonoBehaviour
     [SerializeField] private bool attackKeyValue;
     public bool AttackKeyValue { get => attackKeyValue; private set => attackKeyValue = value; }
 
+    //2P
+    [SerializeField] private Vector2 moveKey2Value;
+    public Vector2 MoveKey2Value { get => moveKey2Value; private set => moveKey2Value = value; }
+    [SerializeField] private bool moveBoostKey2Value;
+    public bool MoveBoostKey2Value { get => moveBoostKey2Value; private set => moveBoostKey2Value = value; }
+
     Vector2 oldJoystickMoveActionValue;  //判断是否有新输入变化值
 
 
@@ -137,6 +143,9 @@ public class MyInputSystemManager : MonoBehaviour
         RegisterActionListener<bool>(gamePlay.MoveBoost, (val) => { MoveBoostKeyValue = val; });
         RegisterActionListener<bool>(uiPlay.Return, (val) => { AttackKeyValue = val; });
         RegisterActionListener<bool>(gamePlay.Attack, (val) => { AttackKeyValue = val; });
+
+        RegisterActionListener<Vector2>(gamePlay.Move2, (val) => { MoveKey2Value = val; });
+        RegisterActionListener<bool>(gamePlay.MoveBoost2, (val) => { MoveBoostKey2Value = val; });
 
     }
 

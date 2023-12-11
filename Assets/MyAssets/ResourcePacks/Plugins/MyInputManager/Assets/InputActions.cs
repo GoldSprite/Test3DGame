@@ -37,9 +37,27 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Move2"",
+                    ""type"": ""Value"",
+                    ""id"": ""1acd3a8a-5550-4c2f-bdae-e3a304c43b65"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""MoveBoost"",
                     ""type"": ""Value"",
                     ""id"": ""89836cf1-7457-42ca-b127-87eb4e58237c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveBoost2"",
+                    ""type"": ""Value"",
+                    ""id"": ""0e130ae2-9342-4a85-ae81-0607176aa569"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -183,7 +201,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fb765f67-95f9-4234-bd20-66a1e7f9d9ce"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -210,6 +228,72 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ExchangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""↑↓←→"",
+                    ""id"": ""efdfd0f7-999c-44a3-9872-76489380a81f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d44f272b-4fe8-4293-b223-28cd0dedd0d6"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d042802d-d917-4492-b7db-1f7295d1fc61"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f31daf0f-3cc1-4719-8f2c-5caa3b5c7d34"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d29bd986-0163-4046-a266-ca7db6dacfae"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffb2c98c-b7fd-48b7-8410-8317127368b3"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveBoost2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -255,7 +339,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
+        m_GamePlay_Move2 = m_GamePlay.FindAction("Move2", throwIfNotFound: true);
         m_GamePlay_MoveBoost = m_GamePlay.FindAction("MoveBoost", throwIfNotFound: true);
+        m_GamePlay_MoveBoost2 = m_GamePlay.FindAction("MoveBoost2", throwIfNotFound: true);
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
         m_GamePlay_UseItem = m_GamePlay.FindAction("UseItem", throwIfNotFound: true);
         m_GamePlay_PickUPItem = m_GamePlay.FindAction("PickUPItem", throwIfNotFound: true);
@@ -326,7 +412,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
+    private readonly InputAction m_GamePlay_Move2;
     private readonly InputAction m_GamePlay_MoveBoost;
+    private readonly InputAction m_GamePlay_MoveBoost2;
     private readonly InputAction m_GamePlay_Attack;
     private readonly InputAction m_GamePlay_UseItem;
     private readonly InputAction m_GamePlay_PickUPItem;
@@ -337,7 +425,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         private @InputActions m_Wrapper;
         public GamePlayActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
+        public InputAction @Move2 => m_Wrapper.m_GamePlay_Move2;
         public InputAction @MoveBoost => m_Wrapper.m_GamePlay_MoveBoost;
+        public InputAction @MoveBoost2 => m_Wrapper.m_GamePlay_MoveBoost2;
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
         public InputAction @UseItem => m_Wrapper.m_GamePlay_UseItem;
         public InputAction @PickUPItem => m_Wrapper.m_GamePlay_PickUPItem;
@@ -355,9 +445,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Move2.started += instance.OnMove2;
+            @Move2.performed += instance.OnMove2;
+            @Move2.canceled += instance.OnMove2;
             @MoveBoost.started += instance.OnMoveBoost;
             @MoveBoost.performed += instance.OnMoveBoost;
             @MoveBoost.canceled += instance.OnMoveBoost;
+            @MoveBoost2.started += instance.OnMoveBoost2;
+            @MoveBoost2.performed += instance.OnMoveBoost2;
+            @MoveBoost2.canceled += instance.OnMoveBoost2;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -380,9 +476,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Move2.started -= instance.OnMove2;
+            @Move2.performed -= instance.OnMove2;
+            @Move2.canceled -= instance.OnMove2;
             @MoveBoost.started -= instance.OnMoveBoost;
             @MoveBoost.performed -= instance.OnMoveBoost;
             @MoveBoost.canceled -= instance.OnMoveBoost;
+            @MoveBoost2.started -= instance.OnMoveBoost2;
+            @MoveBoost2.performed -= instance.OnMoveBoost2;
+            @MoveBoost2.canceled -= instance.OnMoveBoost2;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -473,7 +575,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IGamePlayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnMove2(InputAction.CallbackContext context);
         void OnMoveBoost(InputAction.CallbackContext context);
+        void OnMoveBoost2(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnPickUPItem(InputAction.CallbackContext context);
