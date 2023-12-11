@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69fdd5a661501b645adb5eb11a0b72b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FullAnimNames: []
 --- !u!1101 &-6311951541148875828
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69fdd5a661501b645adb5eb11a0b72b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FullAnimNames: []
 --- !u!1101 &5185278855704465556
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -726,7 +728,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -6697769899762232819}
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
