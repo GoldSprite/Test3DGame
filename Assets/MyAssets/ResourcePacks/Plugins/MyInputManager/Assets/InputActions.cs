@@ -73,6 +73,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Attack2"",
+                    ""type"": ""Value"",
+                    ""id"": ""055c6ea7-42f4-490a-a52e-a6db08f42523"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""UseItem"",
                     ""type"": ""Value"",
                     ""id"": ""a34b85be-68d2-493a-be79-d5c39f9571ee"",
@@ -296,6 +305,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""MoveBoost2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e60f3eb-cd3f-46de-89db-e4495d6ed708"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -343,6 +363,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_GamePlay_MoveBoost = m_GamePlay.FindAction("MoveBoost", throwIfNotFound: true);
         m_GamePlay_MoveBoost2 = m_GamePlay.FindAction("MoveBoost2", throwIfNotFound: true);
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
+        m_GamePlay_Attack2 = m_GamePlay.FindAction("Attack2", throwIfNotFound: true);
         m_GamePlay_UseItem = m_GamePlay.FindAction("UseItem", throwIfNotFound: true);
         m_GamePlay_PickUPItem = m_GamePlay.FindAction("PickUPItem", throwIfNotFound: true);
         m_GamePlay_FinalSkill = m_GamePlay.FindAction("FinalSkill", throwIfNotFound: true);
@@ -416,6 +437,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_MoveBoost;
     private readonly InputAction m_GamePlay_MoveBoost2;
     private readonly InputAction m_GamePlay_Attack;
+    private readonly InputAction m_GamePlay_Attack2;
     private readonly InputAction m_GamePlay_UseItem;
     private readonly InputAction m_GamePlay_PickUPItem;
     private readonly InputAction m_GamePlay_FinalSkill;
@@ -429,6 +451,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @MoveBoost => m_Wrapper.m_GamePlay_MoveBoost;
         public InputAction @MoveBoost2 => m_Wrapper.m_GamePlay_MoveBoost2;
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
+        public InputAction @Attack2 => m_Wrapper.m_GamePlay_Attack2;
         public InputAction @UseItem => m_Wrapper.m_GamePlay_UseItem;
         public InputAction @PickUPItem => m_Wrapper.m_GamePlay_PickUPItem;
         public InputAction @FinalSkill => m_Wrapper.m_GamePlay_FinalSkill;
@@ -457,6 +480,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Attack2.started += instance.OnAttack2;
+            @Attack2.performed += instance.OnAttack2;
+            @Attack2.canceled += instance.OnAttack2;
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
@@ -488,6 +514,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Attack2.started -= instance.OnAttack2;
+            @Attack2.performed -= instance.OnAttack2;
+            @Attack2.canceled -= instance.OnAttack2;
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
@@ -579,6 +608,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMoveBoost(InputAction.CallbackContext context);
         void OnMoveBoost2(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnAttack2(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnPickUPItem(InputAction.CallbackContext context);
         void OnFinalSkill(InputAction.CallbackContext context);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestAttackHurtAnim : MonoBehaviour
 {
-    public EntityComponent ent;
+    public IHurtable ent;
 
     public bool attack;
 

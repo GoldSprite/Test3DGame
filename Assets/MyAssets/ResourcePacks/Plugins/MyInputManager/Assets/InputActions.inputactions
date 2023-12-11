@@ -51,6 +51,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Attack2",
+                    "type": "Value",
+                    "id": "055c6ea7-42f4-490a-a52e-a6db08f42523",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "UseItem",
                     "type": "Value",
                     "id": "a34b85be-68d2-493a-be79-d5c39f9571ee",
@@ -272,6 +281,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveBoost2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e60f3eb-cd3f-46de-89db-e4495d6ed708",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

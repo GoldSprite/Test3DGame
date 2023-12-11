@@ -25,10 +25,15 @@ public class My3DPlayerController : MonoBehaviour
 
     //按键触发事件
     //public Action<Vector2> MoveAction;
+    public Action<bool> AttackAction;
 
-    //按键映射
+    //按键映射值
     public Vector2 MoveKeyValue => mode == ControlType.P1 ? input.MoveKeyValue : input.MoveKey2Value;
     public bool MoveBoostKeyValue => mode == ControlType.P1 ? input.MoveBoostKeyValue : input.MoveBoostKey2Value;
+    //public bool AttackKeyValue => mode == ControlType.P1 ? input.AttackKeyValue : input.AttackKey2Value;
+
+    //按键映射
+    InputAction AttackKeyAction => mode == ControlType.P1 ? input.InputActionInstance.GamePlay.Attack : input.InputActionInstance.GamePlay.Attack2;
 
 
     private void Start()
@@ -48,6 +53,7 @@ public class My3DPlayerController : MonoBehaviour
     {
         RemoveAllActionListeners();
     }
+
 
     Quaternion FaceTurningRotation;
     float TransitionRate = 4.5f;  //动画切换过渡时间速率
@@ -109,6 +115,18 @@ public class My3DPlayerController : MonoBehaviour
         //    Debug.Log(v+", Walk: "+ anim.GetInteger("Walk"));
         //};
         //input.RegisterActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
+        AttackAction = (down) =>
+        {
+            if (down)
+            {
+                anim.SetInteger("Attack", 1);
+            }
+            else
+            {
+                anim.SetInteger("Attack", 0);
+            }
+        };
+        input.RegisterActionListener(AttackKeyAction, AttackAction);
     }
 
 

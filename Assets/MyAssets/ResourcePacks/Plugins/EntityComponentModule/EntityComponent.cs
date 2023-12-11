@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class EntityComponent: MonoBehaviour
+public class EntityComponent: MonoBehaviour, IHurtable
 {
 #if UNITY_EDITOR
     [RequireEssentials(typeof(Animator))] public string RequireVal;
@@ -22,7 +22,7 @@ public class EntityComponent: MonoBehaviour
     public float Health { get => health; protected set => health = value; }
 
     //事件
-    public Action<Vector3, float> TakeDamage;
+    public Action<Vector3, float> TakeDamage { get; protected set; }
 
 
     public EntityComponent()
