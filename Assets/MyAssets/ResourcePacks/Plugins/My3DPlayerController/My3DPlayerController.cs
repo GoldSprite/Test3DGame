@@ -16,7 +16,7 @@ public class My3DPlayerController : MonoBehaviour
     Animator anim;
 
     //玩家属性
-    public float speed = 1;
+    //float speed = 1;
 
     //按键触发事件
     public Action<Vector2> MoveAction;
@@ -40,34 +40,40 @@ public class My3DPlayerController : MonoBehaviour
         RemoveAllActionListeners();
     }
 
-
-    float FaceTurningRate = 10f;
     Quaternion FaceTurningRotation;
-    float velTransitionNodeRate;
-    float TransitionRate = 5.5f;  //Idle->Walk动画切换过渡时间速率
+    float TransitionRate = 4.5f;  //动画切换过渡时间速率
+    float currentMoveVal;
+    float currentMoveValRate;
+    float currentMoveKeyRate;
     private void MoveTask()
     {
         var moveVec = input.MoveKeyValue;
-        var vel = moveVec;
-        var velLerp = velTransitionNodeRate = Mathf.MoveTowards(velTransitionNodeRate, vel.magnitude, Time.deltaTime * TransitionRate);
-        anim.SetFloat("Speed", velLerp);
-        if (moveVec.magnitude != 0)
+        var dir = UnityUtils.P2To3(moveVec, 0);
+        var moveLength = moveVec.magnitude;
+        var k = 0;
+        if (moveLength != 0)
         {
-            var dir = UnityUtils.P2To3(moveVec, rb.velocity.y);
-            //移动玩家
-            rb.velocity = dir * velTransitionNodeRate * speed;
-            Debug.Log($"velTransitionNodeRate: {velTransitionNodeRate}, rb.velocity: {rb.velocity}");
-
+            k = input.MoveBoostKeyValue ? 2 : 1;
             //朝向转向
-            FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, FaceTurningRotation, Time.deltaTime * TransitionRate);
-
+            Facing(dir);
         }
+
         //动画Blend
-        var keyLength = velTransitionNodeRate;
-        var unitLength = Vector2.one.normalized.magnitude;
-        var rate = keyLength / unitLength;
-        anim.SetFloat("MoveValRate", rate);
+        currentMoveKeyRate = Mathf.MoveTowards(currentMoveKeyRate, moveLength, Time.deltaTime * TransitionRate);
+        currentMoveValRate = Mathf.MoveTowards(currentMoveValRate, k, Time.deltaTime * TransitionRate);
+        currentMoveVal = currentMoveKeyRate * currentMoveValRate;
+        anim.SetFloat("MoveValRate", currentMoveVal);
+    }
+
+
+    private void Facing(Vector3 dir)
+    {
+        FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
+        FaceTurningRotation = Quaternion.Lerp(transform.localRotation, FaceTurningRotation, Time.deltaTime * TransitionRate * currentMoveVal);
+        var eulers = FaceTurningRotation.eulerAngles;
+        eulers.x = eulers.z = 0;
+        FaceTurningRotation.eulerAngles = eulers;
+        transform.localRotation = FaceTurningRotation;
     }
 
 
