@@ -8,14 +8,15 @@ using UnityEngine.InputSystem;
 
 public class My3DPlayerController : MonoBehaviour
 {
-    [RequireEssentials(typeof(Rigidbody))] public string RequireVal;
+    [RequireEssentials(typeof(Rigidbody), typeof(Animator))] public string RequireVal;
 
     //引用
     public MyInputSystemManager input => MyInputSystemManager.Instance;
     Rigidbody rb;
+    Animator anim;
 
     //玩家属性
-    public float speed = 5;
+    public float speed = 1;
 
     //按键触发事件
     public Action<Vector2> MoveAction;
@@ -30,17 +31,7 @@ public class My3DPlayerController : MonoBehaviour
 
     private void Update()
     {
-        var moveVec = input.MoveKeyValue;
-        if (moveVec.magnitude != 0)
-        {
-            var dir = UnityUtils.P2To3(moveVec, rb.velocity.y);
-            //移动玩家
-            rb.velocity = dir * speed;
-
-            //朝向转向
-            FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
-            rb.rotation = Quaternion.Lerp(rb.rotation, FaceTurningRotation, Time.deltaTime * FaceTurningRate);
-        }
+        MoveTask();
     }
 
 
@@ -50,38 +41,59 @@ public class My3DPlayerController : MonoBehaviour
     }
 
 
+    float FaceTurningRate = 10f;
+    Quaternion FaceTurningRotation;
+    float velTransitionNodeRate;
+    float TransitionRate = 5.5f;  //Idle->Walk动画切换过渡时间速率
+    private void MoveTask()
+    {
+        var moveVec = input.MoveKeyValue;
+        var vel = moveVec;
+        var velLerp = velTransitionNodeRate = Mathf.MoveTowards(velTransitionNodeRate, vel.magnitude, Time.deltaTime * TransitionRate);
+        anim.SetFloat("Speed", velLerp);
+        if (moveVec.magnitude != 0)
+        {
+            var dir = UnityUtils.P2To3(moveVec, rb.velocity.y);
+            //移动玩家
+            rb.velocity = dir * velTransitionNodeRate * speed;
+            Debug.Log($"velTransitionNodeRate: {velTransitionNodeRate}, rb.velocity: {rb.velocity}");
+
+            //朝向转向
+            FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, FaceTurningRotation, Time.deltaTime * TransitionRate);
+
+        }
+        //动画Blend
+        var keyLength = velTransitionNodeRate;
+        var unitLength = Vector2.one.normalized.magnitude;
+        var rate = keyLength / unitLength;
+        anim.SetFloat("MoveValRate", rate);
+    }
+
+
     private void GetAllComponents()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
 
-    float FaceTurningRate = 10f;
-    Quaternion FaceTurningRotation;
     private void RegisterAllActionListeners()
     {
-    //    MoveAction = (v) =>
-    //    {
-    //        if (v.magnitude == 0) return;
-
-    //        var dir = UnityUtils.P2To3(v, rb.velocity.y);
-    //        移动玩家
-    //        rb.velocity = dir * speed;
-
-    //        朝向转向
-    //        FaceTurningRotation = Quaternion.LookRotation(dir, Vector3.up);
-    //};
-    //    input.RegisterActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
-    }
-
-
-    private IEnumerator FaceTurningTask(Quaternion rotation)
-    {
-        while (input.MoveKeyValue.magnitude != 0)
-        {
-            rb.rotation *= Quaternion.RotateTowards(rb.rotation, rotation, Time.deltaTime * FaceTurningRate);
-            yield return null;
-        }
+        //MoveAction = (v) =>
+        //{
+        //    //设置动画
+        //    if(v.magnitude != 0)
+        //    {
+        //        anim.SetInteger("Walk", 1);
+        //    }
+        //    else if(anim.GetInteger("Walk") == 2)
+        //    {
+        //        anim.SetInteger("Walk", 3);
+        //    }
+        //    Debug.Log(v+", Walk: "+ anim.GetInteger("Walk"));
+        //};
+        //input.RegisterActionListener(input.InputActionInstance.GamePlay.Move, MoveAction);
     }
 
 

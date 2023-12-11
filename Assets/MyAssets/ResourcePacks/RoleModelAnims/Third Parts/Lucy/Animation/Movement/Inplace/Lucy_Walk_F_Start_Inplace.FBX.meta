@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 040e42fcbac06644f9652bbbd104abde
 ModelImporter:
-  serializedVersion: 20300
+  serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -3777942803645481349
@@ -17,6 +17,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -44,7 +45,7 @@ ModelImporter:
       name: Lucy_Walk_F_Start_Inplace
       takeName: Lucy_Walk_F_Start_Inplace
       internalID: 0
-      firstFrame: 0
+      firstFrame: 17
       lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
@@ -81,6 +82,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -92,6 +94,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

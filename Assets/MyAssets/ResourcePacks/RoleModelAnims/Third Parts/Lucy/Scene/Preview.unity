@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WM_F
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4160705640839613229, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -338,12 +342,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 2219747a53ee9094db2df15d364e95ad, type: 2}
     - target: {fileID: 5866666021909216657, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
+    - target: {fileID: 5866666021909216657, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1bd3deb5c032c744ca65a9314bb75b80, type: 2}
+      objectReference: {fileID: 9100000, guid: afaf178b7465fb3428e74b27366ba7c9, type: 2}
     - target: {fileID: 5866666021909216657, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}

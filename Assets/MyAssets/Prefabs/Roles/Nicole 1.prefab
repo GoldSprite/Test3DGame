@@ -7345,7 +7345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RequireVal: 
-  speed: 7
+  speed: 1
 --- !u!95 &5301593318525311921
 Animator:
   serializedVersion: 5
@@ -7356,7 +7356,7 @@ Animator:
   m_GameObject: {fileID: 5509957381732213490}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f0978b54260dc274f91e42cb1b65d844, type: 3}
-  m_Controller: {fileID: 9100000, guid: d99f78f6509b96444982b790f2e026d5, type: 2}
+  m_Controller: {fileID: 9100000, guid: afaf178b7465fb3428e74b27366ba7c9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -23849,8 +23849,8 @@ PrefabInstance:
       value: -0.170161
       objectReference: {fileID: 0}
     - target: {fileID: 5301593318525311921, guid: 134d1e3bc400b2341affca313e60efc7, type: 3}
-      propertyPath: m_Controller
-      value: 
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5301593318525311921, guid: 134d1e3bc400b2341affca313e60efc7, type: 3}
       propertyPath: m_WarningMessage
