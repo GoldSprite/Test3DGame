@@ -339,8 +339,8 @@ public class ScreenManager : MonoBehaviour
 
     public void StartCanvas_StartBtn()
     {
-        //CGScreenTransition(ScreenType.LevelSelectionScreen);
-        CGScreenTransition(ScreenType.GamePlayScreen);
+        CGScreenTransition(ScreenType.LevelSelectionScreen);
+        //CGScreenTransition(ScreenType.GamePlayScreen);
     }
 
     public void StartCanvas_OptionsBtn()
@@ -394,6 +394,12 @@ public class ScreenManager : MonoBehaviour
     public void ReturnStartScreenBtn()
     {
         CGScreenTransition(ScreenType.StartScreen);
+    }
+
+
+    public void ReturnGamePlayScreenBtn()
+    {
+        CGScreenTransition(ScreenType.GamePlayScreen);
     }
 
 
