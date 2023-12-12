@@ -116,6 +116,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Value"",
+                    ""id"": ""8d9bf4df-0997-429b-ab8f-693390afada4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump2"",
+                    ""type"": ""Value"",
+                    ""id"": ""33656c9e-99b3-4c4d-96a6-97156eec1698"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -316,6 +334,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Attack2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d566e0c7-eca7-4236-bb5a-6c4042711998"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f538bd12-9507-4ede-b33a-39c0cbc69cf1"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -368,6 +408,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_GamePlay_PickUPItem = m_GamePlay.FindAction("PickUPItem", throwIfNotFound: true);
         m_GamePlay_FinalSkill = m_GamePlay.FindAction("FinalSkill", throwIfNotFound: true);
         m_GamePlay_ExchangeWeapon = m_GamePlay.FindAction("ExchangeWeapon", throwIfNotFound: true);
+        m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
+        m_GamePlay_Jump2 = m_GamePlay.FindAction("Jump2", throwIfNotFound: true);
         // UIPlay
         m_UIPlay = asset.FindActionMap("UIPlay", throwIfNotFound: true);
         m_UIPlay_Return = m_UIPlay.FindAction("Return", throwIfNotFound: true);
@@ -442,6 +484,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_PickUPItem;
     private readonly InputAction m_GamePlay_FinalSkill;
     private readonly InputAction m_GamePlay_ExchangeWeapon;
+    private readonly InputAction m_GamePlay_Jump;
+    private readonly InputAction m_GamePlay_Jump2;
     public struct GamePlayActions
     {
         private @InputActions m_Wrapper;
@@ -456,6 +500,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @PickUPItem => m_Wrapper.m_GamePlay_PickUPItem;
         public InputAction @FinalSkill => m_Wrapper.m_GamePlay_FinalSkill;
         public InputAction @ExchangeWeapon => m_Wrapper.m_GamePlay_ExchangeWeapon;
+        public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
+        public InputAction @Jump2 => m_Wrapper.m_GamePlay_Jump2;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -495,6 +541,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ExchangeWeapon.started += instance.OnExchangeWeapon;
             @ExchangeWeapon.performed += instance.OnExchangeWeapon;
             @ExchangeWeapon.canceled += instance.OnExchangeWeapon;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Jump2.started += instance.OnJump2;
+            @Jump2.performed += instance.OnJump2;
+            @Jump2.canceled += instance.OnJump2;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -529,6 +581,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ExchangeWeapon.started -= instance.OnExchangeWeapon;
             @ExchangeWeapon.performed -= instance.OnExchangeWeapon;
             @ExchangeWeapon.canceled -= instance.OnExchangeWeapon;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Jump2.started -= instance.OnJump2;
+            @Jump2.performed -= instance.OnJump2;
+            @Jump2.canceled -= instance.OnJump2;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -613,6 +671,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnPickUPItem(InputAction.CallbackContext context);
         void OnFinalSkill(InputAction.CallbackContext context);
         void OnExchangeWeapon(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnJump2(InputAction.CallbackContext context);
     }
     public interface IUIPlayActions
     {

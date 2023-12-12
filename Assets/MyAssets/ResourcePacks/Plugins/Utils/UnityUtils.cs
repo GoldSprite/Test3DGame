@@ -93,4 +93,12 @@ public class UnityUtils
     }
 
 
+    public static bool CompareLayerMaskByName(GameObject obj, string layerName)
+    {
+        var layer = obj.layer;
+        var layerOrMask = LayerMask.NameToLayer(layerName);
+        return (layer & layerOrMask) != 0;
+    }
+
+
 }

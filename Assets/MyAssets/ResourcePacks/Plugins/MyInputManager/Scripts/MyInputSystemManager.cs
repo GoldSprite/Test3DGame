@@ -28,6 +28,8 @@ public class MyInputSystemManager : MonoBehaviour
     public bool ReturnKeyValue { get => returnKeyValue; private set => returnKeyValue = value; }
     [SerializeField] private bool attackKeyValue;
     public bool AttackKeyValue { get => attackKeyValue; private set => attackKeyValue = value; }
+    [SerializeField] private bool jumpKeyValue;
+    public bool JumpKeyValue { get => jumpKeyValue; private set => jumpKeyValue = value; }
 
     //2P
     [SerializeField] private Vector2 moveKey2Value;
@@ -36,6 +38,8 @@ public class MyInputSystemManager : MonoBehaviour
     public bool MoveBoostKey2Value { get => moveBoostKey2Value; private set => moveBoostKey2Value = value; }
     [SerializeField] private bool attackKey2Value;
     public bool AttackKey2Value { get => attackKey2Value; private set => attackKey2Value = value; }
+    [SerializeField] private bool jumpKey2Value;
+    public bool JumpKey2Value { get => jumpKey2Value; private set => jumpKey2Value = value; }
 
     Vector2 oldJoystickMoveActionValue;  //判断是否有新输入变化值
 
@@ -145,10 +149,12 @@ public class MyInputSystemManager : MonoBehaviour
         RegisterActionListener<bool>(gamePlay.MoveBoost, (val) => { MoveBoostKeyValue = val; });
         RegisterActionListener<bool>(uiPlay.Return, (val) => { AttackKeyValue = val; });
         RegisterActionListener<bool>(gamePlay.Attack, (val) => { AttackKeyValue = val; });
+        RegisterActionListener<bool>(gamePlay.Jump, (val) => { JumpKeyValue = val; });
 
         RegisterActionListener<Vector2>(gamePlay.Move2, (val) => { MoveKey2Value = val; });
         RegisterActionListener<bool>(gamePlay.MoveBoost2, (val) => { MoveBoostKey2Value = val; });
         RegisterActionListener<bool>(gamePlay.Attack2, (val) => { AttackKey2Value = val; });
+        RegisterActionListener<bool>(gamePlay.Jump2, (val) => { JumpKey2Value = val; });
 
     }
 
