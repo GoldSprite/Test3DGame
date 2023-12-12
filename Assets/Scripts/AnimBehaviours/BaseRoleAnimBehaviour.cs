@@ -21,6 +21,7 @@ public abstract class BaseRoleAnimBehaviour : StateMachineBehaviour
         {
             new MyKVPair<string, string>(){ Key="Attack", Value="Base Layer.Lucy_Kick02_Root" },
             new MyKVPair<string, string>(){ Key="Hurt", Value="Base Layer.HurtBlend Tree" },
+            new MyKVPair<string, string>(){ Key="Jump", Value="Base Layer.JumpLand" },
         };
     }
 
@@ -44,6 +45,12 @@ public abstract class BaseRoleAnimBehaviour : StateMachineBehaviour
     {
         //Hurt播放完毕退出
         if (IsCurrentAnimByFullName(stateInfo, "Hurt")) animator.SetBool("Hurt", false);
+
+        //落地时开启rootMotion
+        if (IsCurrentAnimByFullName(stateInfo, "Jump"))
+        {
+            //animator.gam
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

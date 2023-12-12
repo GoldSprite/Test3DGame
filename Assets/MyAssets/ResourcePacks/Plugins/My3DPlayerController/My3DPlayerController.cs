@@ -20,6 +20,7 @@ public class My3DPlayerController : MonoBehaviour
 
     //配置
     public ControlType mode;
+    public bool AnimApplyRootMotion = true;
 
     //玩家属性
     public float speed = 15;
@@ -52,6 +53,8 @@ public class My3DPlayerController : MonoBehaviour
         MoveTask();
 
         anim.SetBool("Grounded", gDetection.IsGround);  //更新地面检查动画变量
+
+        //anim.applyRootMotion = AnimApplyRootMotion;
     }
 
 

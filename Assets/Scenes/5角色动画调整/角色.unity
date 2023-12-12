@@ -846,6 +846,10 @@ PrefabInstance:
       propertyPath: mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1452557613421780285, guid: 929d2c15696d34c43826d61d8be2a5fe, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1509644034841689683, guid: 929d2c15696d34c43826d61d8be2a5fe, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.98799735
@@ -892,7 +896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1788651931266241764, guid: 929d2c15696d34c43826d61d8be2a5fe, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1815741741275621049, guid: 929d2c15696d34c43826d61d8be2a5fe, type: 3}
       propertyPath: m_LocalRotation.w
